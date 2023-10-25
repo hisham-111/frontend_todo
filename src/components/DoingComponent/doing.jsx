@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import Data from "./doingData";
 import "./index.css";
-function Doing() {
+function Doing({ searchResults }, ref) {
   const [doing, setDoing] = React.useState(Data);
   return (
     <div className="parent-container-box-todo">

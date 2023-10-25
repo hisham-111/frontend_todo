@@ -1,0 +1,74 @@
+.search-author-container-searchBar {
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  margin: 20px auto;
+}
+
+.search-input-author-searchBar {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-author-button {
+  background-color: #6f5d75;
+  border: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+  border-radius: 0px 10px 10px 0px;
+  padding: 12px 10px;
+  margin-right: 1px;
+}
+
+.search-author-button:hover {
+  background-color: #e0e0e0;
+}
+
+.search-author-button:focus {
+  outline: none;
+}
+
+.search-author-button i {
+  color: #888;
+  transition: transform 0.3s ease;
+}
+
+.search-author-button:hover i {
+  transform: scale(1.2);
+}
+.search-input-author-searchBar {
+  max-width: 100%;
+  padding: 16px 10px;
+  margin: 10px auto;
+}
+
+@media (max-width: 600px) {
+  .search-author-container-searchBar {
+    max-width: 100%;
+    padding: 16px 0;
+    margin: -30px 8px;
+  }
+}
+
+.search-input-author-searchBar {
+  padding: 14px !important;
+  border: 1px solid #ddd;
+  border-radius: 5px !important;
+  width: 100%;
+}
+@media (width: 280px) {
+  .search-input-author-searchBar {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+}

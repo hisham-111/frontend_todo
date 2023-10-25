@@ -2,7 +2,7 @@ import React from "react";
 import { TiInputCheckedOutline } from "react-icons/ti";
 import Data from "./doneData";
 import "./index.css";
-function Done() {
+function Done({ searchResults }, ref) {
   const [done, setDone] = React.useState(Data);
   return (
     <div className="parent-container-box-todo">

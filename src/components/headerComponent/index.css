@@ -27,8 +27,42 @@
   color: rgb(163, 163, 236) !important;
 }
 
+.avatar-hidden-login {
+  border-radius: 22% 22% 12% 12%;
+}
 .avatar {
   height: 25px;
   width: 25px;
   border-radius: 50%;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+.box-login-hidden {
+  position: absolute;
+  display: flex;
+  gap: 1.2rem;
+  background-color: #2e2c2c;
+  width: 230px;
+  right: 3rem;
+  padding: 2rem 1rem;
+  z-index: 999;
+  top: 3rem;
+}
+.email-login {
+  font-size: 16px;
+  color: rgb(159, 79, 233);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logout {
+  font-size: 14px;
+}
+.box-login {
+  display: flex;
+  flex-direction: column;
 }

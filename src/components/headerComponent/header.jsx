@@ -1,8 +1,8 @@
 import React from "react";
 import Icon from "../../logo.svg";
+import Avatar from "../../assets/avatar.jpeg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
-import { RxAvatar } from "react-icons/rx";
 
 import "./index.css";
 function Header() {
@@ -19,7 +19,7 @@ function Header() {
           </li>
 
           <li className="navlink">
-            <img className="avatar" src={Icon} alt="Icon" width={35} />
+            <img className="avatar" src={Avatar} alt="Icon" width={35} />
           </li>
         </ul>
       </div>

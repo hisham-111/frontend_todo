@@ -1,5 +1,3 @@
-import Mp3_1 from "./data/not1.mp3";
-
 const TodoData = [
   {
     id: "1",

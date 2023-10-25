@@ -1,6 +1,6 @@
-.parent-container-box-todo {
+/* .parent-container-box-todo {
   width: 74%;
-}
+} */
 .head-todo {
   background-color: rgb(46, 44, 44);
   padding: 0.7rem;
@@ -9,7 +9,7 @@
   justify-content: flex-start;
   border-radius: 7px;
   color: white;
-  margin-left: 2rem;
+  width: 100%;
 }
 .title-head-todo {
   font-weight: bold;
@@ -26,15 +26,25 @@
 .box-todo {
   background-color: rgb(46, 44, 44);
   margin-top: 0.7rem;
-  margin-left: 2rem;
   padding: 1.4rem;
   border-radius: 7px;
   margin-bottom: 0.3rem;
   color: white;
-  width: 92%;
+  width: 100%;
+}
+
+.title-box-todo {
+  width: 100%;
+  font-size: 18px;
 }
 
 .box-todo .text-box {
   margin-top: 0.7rem;
-  color: #919090;
 }
+
+.tile-list {
+  color: #919090;
+  margin-right: 0.1rem;
+}
+
+

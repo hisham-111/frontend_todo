@@ -1,0 +1,23 @@
+.head_nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 2rem;
+}
+
+.nav-list {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.nav-list .navlink {
+  list-style: none;
+  text-decoration: none;
+}
+.navlink {
+  font-size: 24px;
+  color: rgb(163, 163, 236);
+}
+.addlink {
+  color: rgb(163, 163, 236) !important;
+}

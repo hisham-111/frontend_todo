@@ -12,6 +12,7 @@
 
 .nav-list {
   display: flex;
+  align-items: center;
   gap: 1.4rem;
 }
 
@@ -65,4 +66,10 @@
 .box-login {
   display: flex;
   flex-direction: column;
+}
+
+#search-box {
+  position: absolute;
+  top: 1.2rem;
+  right: 9rem;
 }

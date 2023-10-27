@@ -24,15 +24,13 @@
   padding: 2rem 1.4rem;
   display: block;
   font-style: italic;
-
-  transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
 }
 
 .remove-icon {
   position: absolute;
   color: white;
   right: 0.7rem;
-  top: 4.2rem;
+  top: 5.2rem;
   font-size: 2rem;
 }
 .questionMark {
@@ -67,7 +65,7 @@
 
   .remove-icon {
     right: 3rem;
-    top: 5.4rem;
+    top: 6.4rem;
   }
 }
 
@@ -85,6 +83,6 @@
 
   .remove-icon {
     right: 3rem;
-    top: 5.4rem;
+    top: 6.4rem;
   }
 }

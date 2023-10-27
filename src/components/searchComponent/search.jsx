@@ -1,34 +1,35 @@
-import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Data from "../todoComponent/todoData";
-import Data2 from "../DoingComponent/doingData";
-import Data3 from "../DoneComponent/doneData";
-
 import "./index.css";
+const SearchBar = ({ posts, setSearchResults }) => {
+  const handleSubmit = (e) => e.preventDefault();
 
-function SearchBar({ onFilter }) {
-  const [filteredList, setFilteredList] = React.useState(Data);
+  const handleSearchChange = (e) => {
+    if (!e.target.value) return setSearchResults(posts);
 
-  const filterBySearch = (event) => {
-    const query = event.target.value.toLowerCase();
+    const resultsArray = posts.filter(
+      (post) =>
+        post.title.includes(e.target.value) ||
+        post.body.includes(e.target.value)
+    );
 
-    const updatedList = Data.filter((item) => {
-      return Object.values(item).some(
-        (value) =>
-          typeof value === "string" && value.toLowerCase().includes(query)
-      );
-    });
-
-    setFilteredList(updatedList);
+    setSearchResults(resultsArray);
   };
-  return (
-    <>
-      <div className="search-header">
-        <input id="search-box" onChange={filterBySearch} />
-      </div>
-    </>
-  );
-}
 
+  return (
+    <header>
+      <form className="search" onSubmit={handleSubmit}>
+        <input
+          className="search__input"
+          type="text"
+          id="search"
+          onChange={handleSearchChange}
+        />
+        <button className="search__button">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </form>
+    </header>
+  );
+};
 export default SearchBar;

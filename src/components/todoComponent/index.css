@@ -1,6 +1,11 @@
 /* .parent-container-box-todo {
   width: 74%;
 } */
+
+.box-todo[data-react-beautiful-dnd-dragging="true"] {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
 .head-todo {
   background-color: rgb(46, 44, 44);
   padding: 0.7rem;
@@ -46,5 +51,3 @@
   color: #919090;
   margin-right: 0.1rem;
 }
-
-

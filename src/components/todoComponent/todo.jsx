@@ -7,12 +7,16 @@ import { useDrag, useDrop } from "react-dnd";
 function DraggableTodoItem({ todoList, index, moveTodo }) {
   const [, ref] = useDrag({
     type: "TODO",
-    item: { index },
+    item: { type: "TODO", index },
   });
 
   const [, drop] = useDrop({
     accept: "TODO",
     hover: (draggedItem) => {
+      if (draggedItem.type !== "TODO") {
+        return;
+      }
+
       if (draggedItem.index !== index) {
         moveTodo(draggedItem.index, index);
         draggedItem.index = index;
@@ -21,7 +25,7 @@ function DraggableTodoItem({ todoList, index, moveTodo }) {
   });
 
   return (
-    <div ref={(node) => ref(drop(node))} className="box-todo">
+    <div ref={(node) => ref(drop(node))} className={"box-todo"}>
       <h3 className="title-box-todo">{todoList.title}</h3>
 
       <div className="list-boxes">
@@ -42,32 +46,29 @@ function DraggableTodoItem({ todoList, index, moveTodo }) {
   );
 }
 
-function Todo() {
-  const [todo, setTodo] = React.useState(Data);
-
+function Todo({ todo, setTodo }) {
   const moveTodo = (fromIndex, toIndex) => {
-    const updatedTodo = [...todo];
-    const [movedItem] = updatedTodo.splice(fromIndex, 1);
-    updatedTodo.splice(toIndex, 0, movedItem);
-    setTodo(updatedTodo);
+    const updatedItems = [...todo];
+    const [movedItem] = updatedItems.splice(fromIndex, 1);
+    updatedItems.splice(toIndex, 0, movedItem);
+    setTodo(updatedItems);
   };
 
   return (
-  
-      <div className="parent-container-box-todo">
-        <div className="head-todo">
-          <GiHamburgerMenu className="burger-todo-icon" />
-          <span className="title-head-todo">To Do</span>
-        </div>
-        {todo.map((todoList, index) => (
-          <DraggableTodoItem
-            key={index}
-            todoList={todoList}
-            index={index}
-            moveTodo={moveTodo}
-          />
-        ))}
+    <div className="parent-container-box-todo">
+      <div className="head-todo">
+        <GiHamburgerMenu className="burger-todo-icon" />
+        <span className="title-head-todo">To Do</span>
       </div>
+      {todo.map((todoList, index) => (
+        <DraggableTodoItem
+          key={todoList.id}
+          todoList={todoList}
+          index={index}
+          moveTodo={moveTodo}
+        />
+      ))}
+    </div>
   );
 }
 

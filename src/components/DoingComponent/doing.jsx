@@ -8,12 +8,16 @@ import { useDrag, useDrop } from "react-dnd";
 function DraggableDoingItem({ doingList, index, moveDoing }) {
   const [, ref] = useDrag({
     type: "DOING",
-    item: { index },
+    item: { type: "DOING", index },
   });
 
   const [, drop] = useDrop({
     accept: "DOING",
     hover: (draggedItem) => {
+      if (draggedItem.type !== "DOING") {
+        return;
+      }
+
       if (draggedItem.index !== index) {
         moveDoing(draggedItem.index, index);
         draggedItem.index = index;
@@ -43,13 +47,12 @@ function DraggableDoingItem({ doingList, index, moveDoing }) {
   );
 }
 
-function Doing() {
-  const [doing, setDoing] = React.useState(Data);
+function Doing({ doing, setDoing }) {
   const moveDoing = (fromIndex, toIndex) => {
-    const updatedDoing = [...doing];
-    const [movedItem] = updatedDoing.splice(fromIndex, 1);
-    updatedDoing.splice(toIndex, 0, movedItem);
-    setDoing(updatedDoing);
+    const updatedItems = [...doing];
+    const [movedItem] = updatedItems.splice(fromIndex, 1);
+    updatedItems.splice(toIndex, 0, movedItem);
+    setDoing(updatedItems);
   };
 
   return (

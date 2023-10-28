@@ -2,18 +2,21 @@ import React from "react";
 import { TiInputCheckedOutline } from "react-icons/ti";
 import Data from "./doneData";
 import "./index.css";
-
 import { useDrag, useDrop } from "react-dnd";
 
 function DraggableDoneItem({ doneList, index, moveDone }) {
   const [, ref] = useDrag({
     type: "DONE",
-    item: { index },
+    item: { type: "DONE", index },
   });
 
   const [, drop] = useDrop({
     accept: "DONE",
     hover: (draggedItem) => {
+      if (draggedItem.type !== "DONE") {
+        return;
+      }
+
       if (draggedItem.index !== index) {
         moveDone(draggedItem.index, index);
         draggedItem.index = index;
@@ -43,20 +46,18 @@ function DraggableDoneItem({ doneList, index, moveDone }) {
   );
 }
 
-function Done() {
-  const [done, setDone] = React.useState(Data);
-  const moveDoing = (fromIndex, toIndex) => {
-    const updatedDone = [...done];
-    const [movedItem] = updatedDone.splice(fromIndex, 1);
-    updatedDone.splice(toIndex, 0, movedItem);
-    setDone(updatedDone);
+function Done({ done, setDone }) {
+  const moveDone = (fromIndex, toIndex) => {
+    const updatedItems = [...done];
+    const [movedItem] = updatedItems.splice(fromIndex, 1);
+    updatedItems.splice(toIndex, 0, movedItem);
+    setDone(updatedItems);
   };
 
   return (
     <div className="parent-container-box-todo">
       <div className="head-todo">
-        <TiInputCheckedOutline className="burger-todo-icon  done-icon" />
-
+        <TiInputCheckedOutline className="burger-todo-icon done-icon" />
         <span className="title-head-todo">Done</span>
       </div>
       {done.map((doneList, index) => (
@@ -64,7 +65,7 @@ function Done() {
           key={index}
           doneList={doneList}
           index={index}
-          moveDone={moveDoing}
+          moveDone={moveDone}
         />
       ))}
     </div>

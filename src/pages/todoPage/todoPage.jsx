@@ -1,47 +1,32 @@
-import React from "react";
-import Todo from "../../components/todoComponent/todo";
-import Doing from "../../components/DoingComponent/doing";
-import Done from "../../components/DoneComponent/done";
+// TodoPage.js
+import React, { useState } from "react";
 import Header from "../../components/headerComponent/header";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { MdPlaylistRemove } from "react-icons/md";
+import Todo from "../../components/todoComponent/todo";
+import Doing from "../../components/DoingComponent/doing";
+import Done from "../../components/DoneComponent/done";
+
+import Data from "../../components/todoComponent/todoData";
+import DoneData from "../../components/DoneComponent/doneData";
+import DoingData from "../../components/DoingComponent/doingData";
+
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-
-import BoardColumn from "../../components/BoardColumnComponent/board-column";
-
 import "./index.css";
-function TodoPage() {
-  const [items, setItems] = React.useState([
-    { id: 1, title: "Task 1", component: "Todo" },
-    { id: 2, title: "Task 2", component: "Doing" },
-  ]);
 
-  const [isShow, setIsShow] = React.useState(false);
+function TodoPage() {
+  const [isShow, setIsShow] = useState(false);
+
+  // Declare state variables and set functions
+  const [todo, setTodo] = useState(Data);
+  const [done, setDone] = useState(DoneData);
+  const [doing, setDoing] = useState(DoingData);
 
   const toggleShow = () => {
-    // setIsShow(!isShow);
-
-    if (!isShow) {
-      setTimeout(() => {
-        setIsShow(true);
-      }, 300);
-    } else {
-      setIsShow(false);
-    }
+    setIsShow(!isShow);
   };
 
-  const moveItem = (fromIndex, toIndex, fromComponent, toComponent) => {
-    const updatedItems = [...items];
-    const [movedItem] = updatedItems.splice(fromIndex, 1);
-    movedItem.component = toComponent;
-    if (fromComponent !== toComponent) {
-      updatedItems.splice(toIndex, 1);
-    } else {
-      updatedItems.splice(toIndex, 0, movedItem);
-    }
-    setItems(updatedItems);
-  };
   return (
     <>
       <Header />
@@ -60,21 +45,11 @@ function TodoPage() {
           </q>
         </div>
       )}
-
       <DndProvider backend={HTML5Backend}>
         <div className="parent-container-todo">
-          <Todo
-            items={items.filter((item) => item.component === "Todo")}
-            moveItem={moveItem}
-          />
-          <Doing
-            items={items.filter((item) => item.component === "Doing")}
-            moveItem={moveItem}
-          />
-          <Done
-            items={items.filter((item) => item.component === "Done")}
-            moveItem={moveItem}
-          />
+          <Todo todo={todo} setTodo={setTodo} />
+          <Doing doing={doing} setDoing={setDoing} />
+          <Done done={done} setDone={setDone} />
         </div>
       </DndProvider>
     </>

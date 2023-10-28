@@ -15,16 +15,6 @@ const DoneData = [
     estimate: "15 minutes",
     importance: "",
   },
-
-  //   {
-  //     id: "3",
-  //     title:
-  //       "Contact the support team of XYZ software to ask about the guarantee princing",
-  //     category: "Follow Up",
-  //     dueDate: "01/10/2022",
-  //     estimate: "0.5 hours",
-  //     importance: "Medium",
-  //   },
 ];
 
 export default DoneData;

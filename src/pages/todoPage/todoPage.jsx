@@ -5,7 +5,8 @@ import Done from "../../components/DoneComponent/done";
 import Header from "../../components/headerComponent/header";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { MdPlaylistRemove } from "react-icons/md";
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import "./index.css";
 function TodoPage() {
   const [isShow, setIsShow] = React.useState(false);
@@ -40,11 +41,14 @@ function TodoPage() {
           </q>
         </div>
       )}
-      <div className="parent-container-todo">
-        <Todo />
-        <Doing />
-        <Done />
-      </div>
+
+      <DndProvider backend={HTML5Backend}>
+        <div className="parent-container-todo">
+          <Todo />
+          <Doing />
+          <Done />
+        </div>
+      </DndProvider>
     </>
   );
 }

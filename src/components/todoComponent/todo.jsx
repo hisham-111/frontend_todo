@@ -1,70 +1,73 @@
-import React, { useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import TodoData from "./todoData";
+import Data from "./todoData";
 import "./index.css";
+import { useDrag, useDrop } from "react-dnd";
 
-function Todo() {
-  const [characters, updateCharacters] = useState(TodoData);
+function DraggableTodoItem({ todoList, index, moveTodo }) {
+  const [, ref] = useDrag({
+    type: "TODO",
+    item: { index },
+  });
 
-  function handleOnDragEnd(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(characters);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    updateCharacters(items);
-  }
+  const [, drop] = useDrop({
+    accept: "TODO",
+    hover: (draggedItem) => {
+      if (draggedItem.index !== index) {
+        moveTodo(draggedItem.index, index);
+        draggedItem.index = index;
+      }
+    },
+  });
 
   return (
-    <div className="parent-container-box-todo">
-      <div className="head-todo">
-        <GiHamburgerMenu className="burger-todo-icon" />
-        <span className="title-head-todo">To Do</span>
-      </div>
+    <div ref={(node) => ref(drop(node))} className="box-todo">
+      <h3 className="title-box-todo">{todoList.title}</h3>
 
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="characters">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {characters.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      className="box-todo"
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}>
-                      <h3 className="title-box-todo">{item.title}</h3>
-                      <div className="list-boxes">
-                        <p className="text-box">
-                          <span className="tile-list">Category</span>:
-                          {item.category}
-                        </p>
-                        <p className="text-box">
-                          <span className="tile-list">Due Date</span>:
-                          {item.dueDate}
-                        </p>
-                        <p className="text-box">
-                          <span className="tile-list">Estimate</span>:
-                          {item.estimate}
-                        </p>
-                        <p className="text-box">
-                          <span className="tile-list">Importance</span>:
-                          {item.importance}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className="list-boxes">
+        <p className="text-box">
+          <span className="tile-list">Category</span> : {todoList.category}
+        </p>
+        <p className="text-box">
+          <span className="tile-list">Due Date</span> : {todoList.dueDate}
+        </p>
+        <p className="text-box">
+          <span className="tile-list">Estimate</span> : {todoList.estimate}
+        </p>
+        <p className="text-box">
+          <span className="tile-list">Importance</span> : {todoList.importance}
+        </p>
+      </div>
     </div>
+  );
+}
+
+function Todo() {
+  const [todo, setTodo] = React.useState(Data);
+
+  const moveTodo = (fromIndex, toIndex) => {
+    const updatedTodo = [...todo];
+    const [movedItem] = updatedTodo.splice(fromIndex, 1);
+    updatedTodo.splice(toIndex, 0, movedItem);
+    setTodo(updatedTodo);
+  };
+
+  return (
+  
+      <div className="parent-container-box-todo">
+        <div className="head-todo">
+          <GiHamburgerMenu className="burger-todo-icon" />
+          <span className="title-head-todo">To Do</span>
+        </div>
+        {todo.map((todoList, index) => (
+          <DraggableTodoItem
+            key={index}
+            todoList={todoList}
+            index={index}
+            moveTodo={moveTodo}
+          />
+        ))}
+      </div>
   );
 }
 

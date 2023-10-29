@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import Data from "./doingData";
+import { Link } from "react-router-dom";
 import "./index.css";
 import { useDrag, useDrop } from "react-dnd";
 
@@ -72,6 +73,9 @@ function Doing({ doing, setDoing }) {
           moveDoing={moveDoing}
         />
       ))}
+      <div className="box-adding-more">
+        <Link className="add-more-card">Add more ...</Link>
+      </div>
     </div>
   );
 }

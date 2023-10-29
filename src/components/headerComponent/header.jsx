@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Icon from "../../logo.svg";
+import { Link } from "react-router-dom";
+import Icon from "../../assets/logo192.png";
 import Avatar from "../../assets/avatar.jpeg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -45,13 +46,14 @@ function Header() {
   return (
     <div className="parent-header-container">
       <div className="head_nav">
-        <img src={Icon} alt="Icon" width={45} />
+        <img src={Icon} alt="Icon"  width={75}/>
         <ul className="nav-list">
           <li className="navlink">
             <SearchBar />
           </li>
-          <li className="navlink  addlink">
+          <li className="navlink  addlink   addItemBox">
             <IoIosAddCircleOutline />
+            <Link className="add-item">Add Item</Link>
           </li>
 
           <li className="navlink">
@@ -88,7 +90,6 @@ function Header() {
                   </a>
 
                   <span className="logout-btn">
-                    {/* <span className="logout">Log Out</span> */}
                     <NavLink
                       to="/"
                       className="logout"
@@ -97,7 +98,7 @@ function Header() {
                       }}>
                       Logout
                     </NavLink>
-                    <BiLogIn />
+                    <BiLogIn className="logoutBtn" />
                   </span>
                 </p>
               </p>

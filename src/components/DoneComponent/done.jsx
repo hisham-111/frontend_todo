@@ -1,6 +1,8 @@
 import React from "react";
 import { TiInputCheckedOutline } from "react-icons/ti";
 import Data from "./doneData";
+import { Link } from "react-router-dom";
+
 import "./index.css";
 import { useDrag, useDrop } from "react-dnd";
 
@@ -68,6 +70,9 @@ function Done({ done, setDone }) {
           moveDone={moveDone}
         />
       ))}
+      <div className="box-adding-more">
+        <Link className="add-more-card">Add more ...</Link>
+      </div>
     </div>
   );
 }

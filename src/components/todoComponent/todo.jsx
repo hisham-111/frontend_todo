@@ -1,5 +1,6 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
 import Data from "./todoData";
 import "./index.css";
 import { useDrag, useDrop } from "react-dnd";
@@ -69,8 +70,9 @@ function Todo({ todo, setTodo }) {
           moveTodo={moveTodo}
         />
       ))}
-
-      <Outlet />
+      <div className="box-adding-more">
+        <Link className="add-more-card">Add more ...</Link>
+      </div>
     </div>
   );
 }

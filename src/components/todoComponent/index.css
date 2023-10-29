@@ -51,3 +51,11 @@
   color: #919090;
   margin-right: 0.1rem;
 }
+.box-adding-more {
+  margin-top: 1.4rem;
+}
+.add-more-card {
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}

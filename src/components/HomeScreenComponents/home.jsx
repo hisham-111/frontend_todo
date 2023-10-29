@@ -10,6 +10,7 @@ import "./index.css";
 function Main() {
   const [showAnimation, setShowAnimation] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
@@ -39,7 +40,7 @@ function Main() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`http://127.0.0.1:8001/api/login`, {
+      const response = await axios.post(`http://127.0.0.1:8000/api/login`, {
         email: formData.email,
         password: formData.password,
       });
@@ -57,7 +58,7 @@ function Main() {
       });
 
       if (true) {
-        navigate("/TodoPAge");
+        navigate("/TodoPage");
         console.log("User successfully logged in");
       } else {
         console.log("Logged-in failed");
@@ -78,6 +79,11 @@ function Main() {
     }
   };
 
+  const logOut = () => {
+    cookie.remove("auth_token");
+    cookie.remove("member");
+    setIsLoggedIn(false); // Set isLoggedIn to false immediately after logging out
+  };
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -98,7 +104,7 @@ function Main() {
         <div className="home-container-login">
           <h2>Time To Work ! </h2>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="formLogin">
             <label htmlFor="email">Email</label>
             <input
               className="input-email  input-type"

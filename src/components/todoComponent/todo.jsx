@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Data from "./todoData";
 import "./index.css";
 import { useDrag, useDrop } from "react-dnd";
+import { Outlet } from "react-router-dom";
 
 function DraggableTodoItem({ todoList, index, moveTodo }) {
   const [, ref] = useDrag({
@@ -68,6 +69,8 @@ function Todo({ todo, setTodo }) {
           moveTodo={moveTodo}
         />
       ))}
+
+      <Outlet />
     </div>
   );
 }

@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import Icon from "../../logo.svg";
 import Avatar from "../../assets/avatar.jpeg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiLogIn } from "react-icons/bi";
 import SearchBar from "../searchComponent/search";
+import cookie from "react-cookies";
 import "./index.css";
 function Header() {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
+  const checkLoggedIn = () => {
+    const authToken = cookie.load("auth_token");
+    const userRole = cookie.load("user_role");
+    const loggedIn = !!authToken;
+
+    console.log("authToken:", authToken);
+    console.log("userRole:", userRole);
+    console.log("loggedIn:", loggedIn);
+
+    setIsLoggedIn(loggedIn);
+    if (loggedIn) {
+      setPageLoaded(true); // Step 2: Set pageLoaded to true after logging in
+    }
+  };
   const toggleVisible = () => {
     if (!isVisible) {
       setTimeout(() => {
@@ -17,6 +35,12 @@ function Header() {
     } else {
       setIsVisible(false);
     }
+  };
+
+  const logOut = () => {
+    cookie.remove("auth_token");
+    cookie.remove("member");
+    setIsLoggedIn(false); // Set isLoggedIn to false immediately after logging out
   };
   return (
     <div className="parent-header-container">
@@ -64,7 +88,16 @@ function Header() {
                   </a>
 
                   <span className="logout-btn">
-                    <span className="logout">Log Out</span> <BiLogIn />
+                    {/* <span className="logout">Log Out</span> */}
+                    <NavLink
+                      to="/"
+                      className="logout"
+                      onClick={(e) => {
+                        logOut();
+                      }}>
+                      Logout
+                    </NavLink>
+                    <BiLogIn />
                   </span>
                 </p>
               </p>
